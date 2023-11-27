@@ -13,3 +13,29 @@
 #user-2{
     display: none;
 }
+
+.controls{
+    position: fixed;
+    padding: 25px;
+    bottom: 0;
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    height: 15%;
+    justify-content: center;
+}
+
+.control-container {
+    background-color: rgb(100, 102, 249,0.9);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.control-container:hover {
+    background-color: rgb(100, 102, 249,0.7);
+}

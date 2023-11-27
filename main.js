@@ -10,6 +10,13 @@ let userId = String(Math.floor(Math.random() * 1000000001));
 let client;
 let channel; 
 
+let urlParams = new URLSearchParams(window.location.search);
+let roomId = urlParams.get('room');
+
+if(!roomId){
+  window.location = 'lobby.html';
+}
+
 const servers = {
   iceServers: [
     {
@@ -21,7 +28,7 @@ const servers = {
 let init = async () => {
   client = await AgoraRTM.createInstance(appId);
   await client.login({ uid: userId,token });
-  channel = client.createChannel('channel-name');
+  channel = client.createChannel(roomId);
   await channel.join();
 
   channel.on('MemberJoined',handleUserJoined);
@@ -32,7 +39,7 @@ let init = async () => {
 
   localStream = await navigator.mediaDevices.getUserMedia({
     video: true,
-    audio: false,
+    audio: true,
   });
   document.getElementById('user-1').srcObject = localStream;
 
@@ -154,6 +161,19 @@ let leaveChannel = async ()=>{
   await client.logout();
 }
 
+let toggleCamera = async ()=>{
+  let videoTrack = localStream.getTracks().find((track)=>track.kind==='video');
+  videoTrack.enabled = !videoTrack.enabled;
+}
+
+let toggleMic = async ()=>{
+  let audioTrack = localStream.getTracks().find((track)=>track.kind==='audio');
+  audioTrack.enabled = !audioTrack.enabled;
+}
+
 window.addEventListener('beforeunload',leaveChannel);
+
+document.getElementById('camera-btn').addEventListener('click',toggleCamera);
+document.getElementById('mic-btn').addEventListener('click',toggleMic);
 
 init();
