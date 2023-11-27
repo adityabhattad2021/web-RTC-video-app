@@ -1,4 +1,4 @@
-# WebRTC-Based WebRTC-Based Video Chat Application
+# WebRTC-Based Video Chat Application
 
 ## Overview
 This application is a web-based video chat platform utilizing WebRTC for real-time communication. It allows users to join chat rooms, stream their audio and video, and interact with other participants in the room.
