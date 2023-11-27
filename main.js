@@ -42,7 +42,6 @@ let init = async () => {
     audio: true,
   });
   document.getElementById('user-1').srcObject = localStream;
-
 };
 
 let handleUserLeft  = (MemberId) => {
@@ -115,7 +114,6 @@ let createPeerConnection = async (MemberId) => {
 }
 
 let createOffer = async (MemberId) => {
-
   await createPeerConnection(MemberId);
 
   let offer = await peerConnection.createOffer();
@@ -129,7 +127,6 @@ let createOffer = async (MemberId) => {
     },
     MemberId,
   )
-
 };
 
 let createAnswer = async (MemberId, offer) => {
