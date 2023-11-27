@@ -38,7 +38,10 @@ let init = async () => {
 
 };
 
-// let handleUserLeft - 
+let handleUserLeft  = (MemberId) => {
+  console.log('User Left: ',MemberId);
+  document.getElementById('user-2').style.display = 'none';
+}
 
 let handleMessageFromPeer = async (message, peerId) => {
   message = JSON.parse(message.text);
@@ -145,5 +148,12 @@ let addAnswer = async (answer) => {
    peerConnection.setRemoteDescription(answer);
  }
 }
+
+let leaveChannel = async ()=>{
+  await channel.leave();
+  await client.logout();
+}
+
+window.addEventListener('beforeunload',leaveChannel);
 
 init();
